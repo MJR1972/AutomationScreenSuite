@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationScreenCapture", "AutomationScreenCapture\AutomationScreenCapture.csproj", "{B9DDAF1C-CC1F-4A8D-8A3C-93E28D9302E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutomationScreenStudio", "AutomationScreenStudio\AutomationScreenStudio.csproj", "{D4B913E8-3A14-48A4-A547-69F9E9A8DD8F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9DDAF1C-CC1F-4A8D-8A3C-93E28D9302E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9DDAF1C-CC1F-4A8D-8A3C-93E28D9302E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9DDAF1C-CC1F-4A8D-8A3C-93E28D9302E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9DDAF1C-CC1F-4A8D-8A3C-93E28D9302E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B913E8-3A14-48A4-A547-69F9E9A8DD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B913E8-3A14-48A4-A547-69F9E9A8DD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B913E8-3A14-48A4-A547-69F9E9A8DD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B913E8-3A14-48A4-A547-69F9E9A8DD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A4E46D3-69D2-4CE2-A4AA-73D8A7C012A7}
+	EndGlobalSection
+EndGlobal
