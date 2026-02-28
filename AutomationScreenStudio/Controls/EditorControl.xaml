@@ -3,21 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             Focusable="True"
+             KeyDown="EditorControl_OnKeyDown"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800">
     <Border Background="#FFF7F3EA" BorderBrush="#FFB7B1A5" BorderThickness="1">
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid x:Name="SurfaceGrid" Background="Transparent">
-                <Image x:Name="BaseImage"
-                       Stretch="None"
-                       SnapsToDevicePixels="True"
-                       Source="{Binding CapturedImage, RelativeSource={RelativeSource AncestorType=UserControl}}" />
-                <Canvas x:Name="OverlayCanvas"
-                        Background="Transparent"
-                        MouseLeftButtonDown="OverlayCanvas_OnMouseLeftButtonDown"
-                        MouseMove="OverlayCanvas_OnMouseMove"
-                        MouseLeftButtonUp="OverlayCanvas_OnMouseLeftButtonUp" />
+        <ScrollViewer x:Name="EditorScrollViewer"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      PreviewMouseWheel="EditorScrollViewer_OnPreviewMouseWheel">
+            <Grid x:Name="ScaledContainer">
+                <Grid.LayoutTransform>
+                    <ScaleTransform x:Name="SurfaceScaleTransform" ScaleX="1" ScaleY="1" />
+                </Grid.LayoutTransform>
+                <Grid x:Name="SurfaceGrid" Background="Transparent">
+                    <Image x:Name="BaseImage"
+                           Stretch="None"
+                           SnapsToDevicePixels="True"
+                           IsHitTestVisible="False"
+                           Source="{Binding CapturedImage, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                    <Canvas x:Name="OverlayCanvas"
+                            Background="Transparent"
+                            MouseLeftButtonDown="OverlayCanvas_OnMouseLeftButtonDown"
+                            MouseMove="OverlayCanvas_OnMouseMove"
+                            MouseLeftButtonUp="OverlayCanvas_OnMouseLeftButtonUp" />
+                    <Canvas x:Name="HandlesCanvas"
+                            Panel.ZIndex="10000"
+                            MouseMove="OverlayCanvas_OnMouseMove"
+                            MouseLeftButtonUp="OverlayCanvas_OnMouseLeftButtonUp" />
+                </Grid>
             </Grid>
         </ScrollViewer>
     </Border>

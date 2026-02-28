@@ -8,6 +8,7 @@ namespace AutomationScreenStudio.Enums
         Rectangle,
         RoundedRectangle,
         Ellipse,
-        Text
+        Text,
+        CaptionBubble
     }
 }

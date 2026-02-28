@@ -32,7 +32,18 @@ namespace AutomationScreenStudio.Markup
 
         public override void Draw(DrawingContext drawingContext)
         {
-            drawingContext.DrawText(CreateFormattedText(), Location);
+            var bounds = GetBounds();
+            var backgroundBrush = Brushes.White;
+            var borderBrush = new SolidColorBrush(Color.FromRgb(0xDD, 0xDD, 0xDD));
+            borderBrush.Freeze();
+
+            drawingContext.DrawRoundedRectangle(
+                backgroundBrush,
+                new Pen(borderBrush, 1),
+                bounds,
+                8,
+                8);
+            drawingContext.DrawText(CreateFormattedText(), new Point(Location.X + 6, Location.Y + 6));
         }
 
         public override bool IsEmpty()
@@ -45,7 +56,11 @@ namespace AutomationScreenStudio.Markup
             var textBlock = new TextBlock();
             return new Border
             {
-                Padding = new Thickness(2),
+                Background = Brushes.White,
+                BorderBrush = new SolidColorBrush(Color.FromRgb(0xDD, 0xDD, 0xDD)),
+                BorderThickness = new Thickness(1),
+                CornerRadius = new CornerRadius(8),
+                Padding = new Thickness(6),
                 Child = textBlock
             };
         }
@@ -61,15 +76,23 @@ namespace AutomationScreenStudio.Markup
             textBlock.FontWeight = FontWeights.SemiBold;
             Canvas.SetLeft(border, Location.X);
             Canvas.SetTop(border, Location.Y);
-            border.BorderBrush = isSelected ? Brushes.Black : Brushes.Transparent;
-            border.BorderThickness = isSelected ? new Thickness(1) : new Thickness(0);
-            border.Background = Brushes.Transparent;
+            border.Background = Brushes.White;
+            border.BorderBrush = isSelected
+                ? Brushes.Black
+                : new SolidColorBrush(Color.FromRgb(0xDD, 0xDD, 0xDD));
+            border.BorderThickness = isSelected ? new Thickness(2) : new Thickness(1);
+            border.CornerRadius = new CornerRadius(8);
+            border.Padding = new Thickness(6);
         }
 
         private Rect GetBounds()
         {
             var formattedText = CreateFormattedText();
-            return new Rect(Location, new Size(formattedText.WidthIncludingTrailingWhitespace, formattedText.Height));
+            return new Rect(
+                Location,
+                new Size(
+                    formattedText.WidthIncludingTrailingWhitespace + 12,
+                    formattedText.Height + 12));
         }
 
         private FormattedText CreateFormattedText()

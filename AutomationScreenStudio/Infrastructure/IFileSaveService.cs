@@ -1,9 +1,10 @@
 using System.Windows.Media.Imaging;
+using AutomationScreenCapture.Imaging;
 
 namespace AutomationScreenStudio.Infrastructure
 {
     public interface IFileSaveService
     {
-        string? SaveBitmap(BitmapSource image);
+        FileSaveResult? SaveBitmap(BitmapSource image, ImageExportOptions options);
     }
 }

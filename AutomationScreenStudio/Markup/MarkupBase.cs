@@ -13,9 +13,9 @@ namespace AutomationScreenStudio.Markup
             Thickness = thickness;
         }
 
-        public Color StrokeColor { get; }
+        public Color StrokeColor { get; private set; }
 
-        public double Thickness { get; }
+        public double Thickness { get; private set; }
 
         public FrameworkElement? VisualElement { get; private set; }
 
@@ -45,6 +45,12 @@ namespace AutomationScreenStudio.Markup
         public abstract void Draw(DrawingContext drawingContext);
 
         public abstract bool IsEmpty();
+
+        public void SetStyle(Color strokeColor, double thickness)
+        {
+            StrokeColor = strokeColor;
+            Thickness = thickness;
+        }
 
         protected Brush CreateStrokeBrush()
         {

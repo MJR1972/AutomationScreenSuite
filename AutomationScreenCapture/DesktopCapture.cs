@@ -100,7 +100,7 @@ namespace AutomationScreenCapture
                     DrawCursor(memoryDc, virtualBounds);
                 }
 
-                var bitmapSource = Imaging.CreateBitmapSourceFromHBitmap(
+                var bitmapSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                     bitmapHandle,
                     IntPtr.Zero,
                     Int32Rect.Empty,

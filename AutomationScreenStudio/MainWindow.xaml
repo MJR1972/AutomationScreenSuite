@@ -11,19 +11,109 @@
         MinWidth="900"
         MinHeight="600"
         Background="#FFF2EEE6">
+    <Window.InputBindings>
+        <KeyBinding Key="C" Modifiers="Ctrl+Shift" Command="{Binding CaptureRegionCommand}" />
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveImageCommand}" />
+        <KeyBinding Key="Delete" Command="{Binding DeleteSelectedCommand}" />
+        <KeyBinding Key="OemPlus" Modifiers="Ctrl" Command="{Binding ZoomInCommand}" />
+        <KeyBinding Key="Add" Modifiers="Ctrl" Command="{Binding ZoomInCommand}" />
+        <KeyBinding Key="OemMinus" Modifiers="Ctrl" Command="{Binding ZoomOutCommand}" />
+        <KeyBinding Key="Subtract" Modifiers="Ctrl" Command="{Binding ZoomOutCommand}" />
+    </Window.InputBindings>
+
     <DockPanel>
-        <Border DockPanel.Dock="Top" Background="#FFE7D8C7" BorderBrush="#FFC4B29B" BorderThickness="0,0,0,1" Padding="12">
+        <Menu DockPanel.Dock="Top" Background="#FFF7F3EA">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Capture Region" Command="{Binding CaptureRegionCommand}" />
+                <MenuItem Header="_Save" Command="{Binding SaveImageCommand}" InputGestureText="Ctrl+S" />
+                <Separator />
+                <MenuItem Header="E_xit" Click="ExitMenuItem_OnClick" />
+            </MenuItem>
+
+            <MenuItem Header="_Edit">
+                <MenuItem Header="_Clear Markups" Command="{Binding ClearMarkupsCommand}" />
+                <MenuItem Header="_Delete Selected" Command="{Binding DeleteSelectedCommand}" InputGestureText="Delete" />
+                <Separator />
+                <MenuItem Header="_Reset Image" Command="{Binding ResetImageCommand}" />
+            </MenuItem>
+
+            <MenuItem Header="_Image">
+                <MenuItem Header="_Grayscale" Command="{Binding ApplyGrayscaleCommand}" />
+                <MenuItem Header="_Invert" Command="{Binding ApplyInvertCommand}" />
+                <Separator />
+                <MenuItem Header="_Rotate">
+                    <MenuItem Header="Rotate Left 90 deg" Command="{Binding RotateLeft90Command}" />
+                    <MenuItem Header="Rotate Right 90 deg" Command="{Binding RotateRight90Command}" />
+                    <MenuItem Header="Rotate Left 45 deg" Command="{Binding RotateLeft45Command}" />
+                    <MenuItem Header="Rotate Right 45 deg" Command="{Binding RotateRight45Command}" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Deskew" Command="{Binding ApplyDeskewCommand}" />
+                <Separator />
+                <MenuItem Header="_Denoise">
+                    <MenuItem Header="_Off" Command="{Binding SetDenoiseOptionCommand}" CommandParameter="Off" />
+                    <MenuItem Header="_Low" Command="{Binding SetDenoiseOptionCommand}" CommandParameter="Low" />
+                    <MenuItem Header="_Medium" Command="{Binding SetDenoiseOptionCommand}" CommandParameter="Medium" />
+                    <MenuItem Header="_High" Command="{Binding SetDenoiseOptionCommand}" CommandParameter="High" />
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="_View">
+                <MenuItem Header="Zoom _In" Command="{Binding ZoomInCommand}" InputGestureText="Ctrl++" />
+                <MenuItem Header="Zoom _Out" Command="{Binding ZoomOutCommand}" InputGestureText="Ctrl+-" />
+                <MenuItem Header="_Reset Zoom" Command="{Binding ZoomResetCommand}" />
+                <MenuItem Header="_Fit to Window" Command="{Binding ZoomFitCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <Border DockPanel.Dock="Top" Background="#FFE7D8C7" BorderBrush="#FFC4B29B" BorderThickness="0,0,0,1" Padding="8">
             <ToolBarTray Background="Transparent">
                 <ToolBar Background="Transparent" BorderThickness="0">
-                    <Button Command="{Binding CaptureRegionCommand}" Content="Capture Region" Padding="12,6" Margin="0,0,8,0" />
-                    <Button Command="{Binding SaveImageCommand}" Content="Save" Padding="12,6" Margin="0,0,8,0" />
-                    <Button Command="{Binding ClearMarkupsCommand}" Content="Clear Markups" Padding="12,6" Margin="0,0,8,0" />
-                    <Button Command="{Binding DeleteSelectedCommand}" Content="Delete Selected" Padding="12,6" Margin="0,0,16,0" />
+                    <Button Command="{Binding CaptureRegionCommand}"
+                            ToolTip="Capture Region"
+                            Padding="12,6"
+                            Margin="0,0,10,0"
+                            FontWeight="SemiBold"
+                            Background="#FFF5E7D0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE114;"
+                                       Margin="0,0,6,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="14" />
+                            <TextBlock Text="Capture"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding DeleteSelectedCommand}"
+                            ToolTip="Delete Selected"
+                            Padding="10,6"
+                            Margin="0,0,10,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontFamily="Segoe MDL2 Assets"
+                                       Text="&#xE107;"
+                                       Margin="0,0,6,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="14" />
+                            <TextBlock Text="Delete Selected"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
                     <Separator />
-                    <TextBlock VerticalAlignment="Center" Margin="12,0,8,0" Text="Tool" FontWeight="SemiBold" />
+                    <TextBlock VerticalAlignment="Center" Margin="4,0,8,0" Text="Tool" FontWeight="SemiBold" />
                     <ComboBox Width="160"
                               ItemsSource="{Binding ToolModes}"
                               SelectedItem="{Binding SelectedTool}"
+                              Margin="0,0,16,0" />
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,8,0" Text="Bubble" FontWeight="SemiBold" />
+                    <ComboBox Width="140"
+                              ItemsSource="{Binding BubbleStyles}"
+                              SelectedItem="{Binding SelectedBubbleStyle}"
+                              Margin="0,0,12,0" />
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,8,0" Text="Tail" FontWeight="SemiBold" />
+                    <ComboBox Width="90"
+                              ItemsSource="{Binding TailSides}"
+                              SelectedItem="{Binding SelectedTailSide}"
                               Margin="0,0,16,0" />
                     <TextBlock VerticalAlignment="Center" Margin="0,0,8,0" Text="Color" FontWeight="SemiBold" />
                     <ComboBox Width="160"
@@ -38,20 +128,52 @@
                             TickFrequency="1"
                             IsSnapToTickEnabled="True"
                             Value="{Binding SelectedThickness}" />
+                    <Separator />
+                    <TextBlock VerticalAlignment="Center" Margin="12,0,8,0" Text="Export" FontWeight="SemiBold" />
+                    <ComboBox Width="80"
+                              ItemsSource="{Binding ExportFormats}"
+                              SelectedItem="{Binding SelectedExportFormat}"
+                              Margin="0,0,8,0" />
+                    <TextBlock VerticalAlignment="Center" Margin="0,0,8,0" Text="Quality" FontWeight="SemiBold" />
+                    <ComboBox Width="70"
+                              ItemsSource="{Binding JpegQualityOptions}"
+                              SelectedItem="{Binding JpegQuality}"
+                              Margin="0,0,8,0" />
+                    <CheckBox Content="Trim Alpha"
+                              IsChecked="{Binding RemoveAlphaIfOpaque}"
+                              VerticalAlignment="Center"
+                              Margin="0,0,12,0" />
+                    <Separator />
+                    <TextBlock VerticalAlignment="Center" Margin="12,0,8,0" Text="Zoom" FontWeight="SemiBold" />
+                    <TextBlock VerticalAlignment="Center"
+                               MinWidth="52"
+                               Text="{Binding ZoomPercentText}"
+                               FontWeight="SemiBold" />
                 </ToolBar>
             </ToolBarTray>
         </Border>
 
         <Border DockPanel.Dock="Bottom" Background="#FFDED6CA" BorderBrush="#FFC4B29B" BorderThickness="0,1,0,0" Padding="12,8">
-            <TextBlock Text="{Binding StatusText}" FontWeight="SemiBold" />
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Left"
+                           Text="{Binding StatusText}"
+                           FontWeight="SemiBold"
+                           Margin="0,0,16,0" />
+                <TextBlock Text="{Binding ImageInfoText}"
+                           FontWeight="SemiBold"
+                           TextTrimming="CharacterEllipsis" />
+            </DockPanel>
         </Border>
 
         <Grid Margin="12">
             <controls:EditorControl x:Name="Editor"
-                                    CapturedImage="{Binding CapturedImage}"
+                                    CapturedImage="{Binding WorkingImage}"
                                     SelectedColor="{Binding SelectedColor}"
                                     SelectedThickness="{Binding SelectedThickness}"
-                                    SelectedTool="{Binding SelectedTool}" />
+                                    SelectedTool="{Binding SelectedTool}"
+                                    Zoom="{Binding Zoom, Mode=TwoWay}"
+                                    SelectedBubbleStyle="{Binding SelectedBubbleStyle, Mode=TwoWay}"
+                                    SelectedTailSide="{Binding SelectedTailSide, Mode=TwoWay}" />
         </Grid>
     </DockPanel>
 </Window>
